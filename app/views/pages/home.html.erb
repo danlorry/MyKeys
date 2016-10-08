@@ -1,0 +1,139 @@
+<%= form_tag search_path, method: :get do %>
+	<div class="row">
+		<div class="col-md-6">
+			<%= text_field_tag :search, params[:search], placeholder: "¿Dónde tienes la casa?", class: "form-control" %>
+		</div>
+		<div class="col-md-2">
+			<%= select :agent_type, params[:agent_type],[["Inmobiliario","Inmobiliario"], ["Vacacional","Vacacional"]], prompt: "Servicio", class: "form-control" %>
+		</div>
+		<div class="col-md-2">
+			<%= submit_tag "Buscar", class: "btn btn-primary" %>
+			
+		</div>
+		
+	</div>
+<% end %>
+
+<br>
+
+<div class="text-center">
+	<nav class="funciona cl-effect-12">
+					<a href="#wistia">¿Cómo funciona?</a>
+	</nav>
+</div>
+
+<br>
+
+<div class="text-center">
+	<h2>Encuentra a los agentes para tu casa</h2>
+	<p>Déjanos las llaves, nosotros nos encargamos.</p>
+</div>
+
+<br>
+
+<div class="row">
+	<div class="col-md-4 col-sm-12">
+		<a href= <%= APP_CONFIG.search_link1 %>>
+			<div class="discovery-card" style="background-image: url('/assets/Madrid.jpg')">
+				<div class="va-container">
+					<div class="va-middle text-center">
+						<div class="ciudad">
+						Madrid
+						</div>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+
+	<div class="col-md-4 col-sm-6">
+		<a href=<%= APP_CONFIG.search_link2 %>>
+			<div class="discovery-card" style="background-image: url('/assets/Barcelona.jpg')">
+				<div class="va-container">
+					<div class="va-middle text-center">
+						<div class="ciudad">
+						Barcelona
+						</div>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+
+	<div class="col-md-4 col-sm-6">
+		<a href=<%= APP_CONFIG.search_link3 %>>
+			<div class="discovery-card" style="background-image: url('/assets/Sevilla.jpg')">
+				<div class="va-container">
+					<div class="va-middle text-center">
+						<div class="ciudad">
+						Sevilla
+						</div>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+
+<div class="text-center">
+	<h2>Agentes destacados</h2>
+	<p>Contacta con los mejores</p>
+</div>
+
+
+    <!-- SPEAKERS SECTION -->	
+	<section id="speakers">
+		
+		<div class="separator"></div>
+		<div class="container">
+			<!-- First Row of Speakers -->
+			<div class="row1">
+			
+			    <% @agents.each do |agent| %>
+				<!-- Speaker 1 -->
+				<div class="col-md-3">
+				
+					<a href="#" class="member-profile">
+						<div class="unhover_img">
+						<%= image_tag avatar_url(agent.user) %>
+						</div>
+						<div class="hover_img">
+						<%= image_tag avatar_url(agent.user) %>
+						</div>
+					    <br>
+						<h4><span>Agente <%= agent.agent_type %> <%= agent.name %> </span> </h4>
+					</a>
+					<br>
+					<a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
+					<a href="#" target="_blank"><i class="fa fa-linkedin"></i></a>
+				</div>
+			
+				<% end %>
+				
+			</div> <!-- End First Row -->
+			
+			
+			<!-- View All Button -->
+			<div class="col-md-12">
+				<button class="btn btn-transparent fadeIn">View All</button>
+			</div>	
+					
+		</div>
+	</section>
+	<!-- //SPEAKERS SECTION -->	
+	
+<!-- VIDEO SECTION -->
+<div class="text-center">
+	<h2>¿Cómo funciona?</h2>
+	<div class="row">
+		<div id = "wistia" class="wistia_embed wistia_async_mtc052t49m" style="height:366px;width:300px top: 50%;left: 50% ;" >&nbsp;</div>
+	</div>	
+</div>
+<!-- //VIDEO SECTION -->
+
+<br>
+
+<script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async>
+	
+</script>
+

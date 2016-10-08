@@ -1,0 +1,133 @@
+<div id="wrapper">
+	
+	<div id="sidebar">
+		<div id="widget" class="sticky">
+
+			<script src="https://maps.googleapis.com/maps/api/js"></script>
+	    <script>
+	      function initialize() {
+	        var mapCanvas = document.getElementById('widget');
+	        var mapOptions = {
+	        	<% if @arrAgents.length > 0 %>
+		          center: new google.maps.LatLng(<%= @arrAgents[0].latitude %>, <%= @arrAgents[0].longitude %>),
+		        <% else %>  
+		        	center: new google.maps.LatLng(40.41, -3.70),
+		        <% end %>  
+	          zoom: 14,
+	          mapTypeId: google.maps.MapTypeId.ROADMAP
+	        }
+	        var map = new google.maps.Map(mapCanvas, mapOptions);
+
+	        <% @arrAgents.each do |agent| %>	
+		        var marker = new google.maps.Marker({
+		        	position: new google.maps.LatLng(<%= agent.latitude %>, <%= agent.longitude %>),
+		        	title: "MyKeys" 
+		        });
+
+		        marker.setMap(map);
+	        <% end %>
+	      }
+	      google.maps.event.addDomListener(window, 'load', initialize);
+	    </script>
+			
+		</div>
+	</div>
+   
+    
+	<div id="article">
+		
+		<div class="row">
+			
+			<div class="col-md-12">
+
+				<%= search_form_for @search, url: search_path do |f| %>
+					
+					<div class="row">
+						<div class="col-md-50">
+							
+							<label>Dirección</label>
+						     <%= text_field_tag :address, params[:address], placeholder: "Cod. Postal, calle, ciudad...", class: "form-control" %>
+						     
+						</div>
+						<br>
+						<div class="col-md-3">
+							<%= select :agent_type, params[:agent_type], [["Inmobiliario","Inmobiliario"], ["Vacacional","Vacacional"]], prompt: "Servicio", class: "form-control" %>
+						</div>
+						<div class="col-md-3">
+							<%= f.text_field :price_gteq, placeholder: "Min Tarifa", class: "form-control" %>
+						</div>
+						<div class="col-md-3">
+							<%= f.text_field :price_lteq, placeholder: "Max Tarifa", class: "form-control" %>
+						</div>
+						 
+					</div>
+					<BR>
+                    <div class="row">
+						<%= f.submit "Buscar", class: "btn btn-primary" %>
+					</div>
+
+				<% end %>
+
+				<hr>
+
+                <% if @arrAgents.length > 0 %>
+					<div class="row">
+						<% @arrAgents.each do |agent| %>
+							
+							<div class="col-md-6">
+								<div class="panel panel-default">
+									<div class="panel-body">
+										<%= link_to agent.name, agent %>
+									</div>
+								</div>
+							</div>
+	
+						<% end %>
+					</div>
+				<% else %>
+			    	<div class="col-md-6">
+							<div class="panel panel-default">
+								<div class="panel-body">
+									No se han encontrado agentes
+								</div>
+							</div>
+						</div>
+				<% end %>
+			</div>
+
+
+		</div>
+
+	</div>
+    
+</div>
+
+
+    
+
+<script>
+	
+	$(function(){ // document ready
+ 
+	  if (!!$('.sticky').offset()) { // make sure ".sticky" element exists
+	 
+	    var stickyTop = $('.sticky').offset().top; // returns number 
+	 
+	    $(window).scroll(function(){ // scroll event
+	 
+	      var windowTop = $(window).scrollTop(); // returns number 
+	 
+	      if (stickyTop < windowTop){
+	        $('.sticky').css({ position: 'fixed', top: 0 });
+	      }
+	      else {
+	        $('.sticky').css('position','static');
+	      }
+	 
+	    });
+	 
+	  }
+	 
+	});
+
+</script>

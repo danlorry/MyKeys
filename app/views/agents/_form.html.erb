@@ -1,0 +1,87 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		Da de alta un servicio
+	</div>
+	<div class="panel-body">
+		<div class="container">
+			
+			<%= form_for @agent, :html => { multipart: true } do |f| %>
+
+				<div class="row">
+				
+						<div class="form-group">
+							<label>Tipo de servicio</label>
+							<%= f.select :agent_type, [["Inmobiliario","Inmobiliario"], ["Vacacional","Vacacional"]], id: "agent_type", prompt: "Seleccionar...", class: "form-control" %>
+						</div>
+				
+
+                </div>
+ 					
+				<div class="row">
+					<div class="form-group">
+						<label>Nombre y apellidos</label>
+						<%= f.text_field :name, placeholder: "", class: "form-control" %>
+					</div>
+				</div>
+				
+                <div class="row">
+					<div class="form-group">
+						<label>Dirección</label>
+						<%= f.text_field :address, placeholder: "Introduce tu dirección", class: "form-control" %>
+					</div>
+				</div>
+
+                <div class="row">
+                    <div class="form-group">
+						<label>Número de teléfono</label>
+						<%= f.text_field :phone_number, placeholder: "Móvil o fijo", class: "form-control" %>
+					</div>
+					
+					<div class="form-group">
+						<label>Correo electrónico</label>
+						<%= f.text_field :email, placeholder: "Correo electrónico", class: "form-control" %>
+					</div>
+				</div>
+				
+                <div class="row">
+					<div class="form-group">
+						<label>Resumen de tu trayectoria</label>
+						<%= f.text_area :about, rows: 5, placeholder: "Da información sobre tu carrera", class: "form-control" %>
+					</div>
+				</div>
+				
+				<div class="row">
+				    <div class="col-md-4">
+						<div class="form-group">
+							<label>Días disponibles</label>
+							<%= f.select :days_availability, [["De Lunes a Viernes","De Lunes a Viernes"], ["Fines de Semana","Fines de Semana"], ["Total","Total"]], id: "days_availability", prompt: "Selecionar...", class: "form-control" %>
+						</div>
+						<div class="form-group">
+							<label>Horario disponible</label>
+							<%= f.select :time_availability, [["Mañana","Mañana"], ["Tarde","Tarde"], ["Noche","Noche"], ["Total","Total"]], id: "days_availability", prompt: "Selecionar...", class: "form-control" %>
+						</div>
+				
+					</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Tarifa por servicio</label>
+							<div class="input-group">
+								<div class="input-group-addon">$</div>
+								<%= f.text_field :price, placeholder: "ej. 30 €", class: "form-control" %>
+							</div>	
+						</div>
+					</div>
+				</div>
+
+				
+
+				<div class="actions">
+					<%= f.submit "Guardar", class: "btn btn-primary" %>
+				</div>
+
+			<% end %>
+
+		</div>
+	</div>
+</div>
